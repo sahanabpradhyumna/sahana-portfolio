@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sahana B — Content Desk</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=IBM+Plex+Mono:wght@400;500;600&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#faf8f3;
+    --paper-shade:#f0ede4;
+    --ink:#1c1b19;
+    --ink-soft:#4a4843;
+    --rule:#d8d3c6;
+    --green:#2f6b4f;
+    --green-bright:#3f8f66;
+    --coral:#c1542f;
+    --mono: 'IBM Plex Mono', monospace;
+    --serif: 'Fraunces', serif;
+    --sans: 'Source Sans 3', sans-serif;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--sans);
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:960px;margin:0 auto;padding:0 28px;}
+
+  /* Masthead */
+  .masthead{
+    border-bottom:3px solid var(--ink);
+    padding:34px 0 18px;
+  }
+  .masthead-top{
+    display:flex;justify-content:space-between;align-items:baseline;
+    font-family:var(--mono);font-size:11px;letter-spacing:.08em;
+    color:var(--ink-soft);text-transform:uppercase;
+    border-bottom:1px solid var(--rule);
+    padding-bottom:10px;margin-bottom:18px;
+    flex-wrap:wrap;gap:6px;
+  }
+  .nameplate{
+    font-family:var(--serif);
+    font-weight:700;
+    font-size:clamp(42px,8vw,78px);
+    line-height:.95;
+    letter-spacing:-0.01em;
+    margin:0;
+  }
+  .nameplate em{font-style:italic;font-weight:500;color:var(--green);}
+  .kicker{
+    font-family:var(--mono);
+    font-size:12px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--green);
+    margin:14px 0 0;
+  }
+  .dek{
+    font-family:var(--serif);
+    font-style:italic;
+    font-weight:500;
+    font-size:20px;
+    color:var(--ink-soft);
+    margin:10px 0 0;
+    max-width:560px;
+  }
+
+  /* Stat strip */
+  .stat-strip{
+    display:flex;
+    border-bottom:1px solid var(--rule);
+    margin-top:26px;
+  }
+  .stat{
+    flex:1;
+    padding:18px 20px 20px;
+    border-right:1px solid var(--rule);
+  }
+  .stat:last-child{border-right:none;}
+  .stat .num{
+    font-family:var(--serif);font-weight:600;font-size:36px;color:var(--ink);
+    display:block;
+  }
+  .stat .label{
+    font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;
+    text-transform:uppercase;color:var(--ink-soft);
+  }
+
+  /* Section framework */
+  section{padding:56px 0;border-bottom:1px solid var(--rule);}
+  section:last-of-type{border-bottom:none;}
+  .section-head{
+    display:flex;align-items:baseline;gap:14px;margin-bottom:30px;
+  }
+  .section-no{
+    font-family:var(--mono);font-size:12px;color:var(--green);
+    letter-spacing:.05em;
+  }
+  h2.section-title{
+    font-family:var(--serif);font-weight:600;font-size:30px;margin:0;
+    letter-spacing:-0.01em;
+  }
+  .section-rule{flex:1;height:1px;background:var(--rule);align-self:center;}
+
+  /* Beats (skills) */
+  .beats{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:0;
+    border-top:1px solid var(--rule);
+  }
+  .beat{
+    padding:24px 22px 6px 0;
+    border-right:1px solid var(--rule);
+  }
+  .beat:last-child{border-right:none;padding-right:0;}
+  .beat:nth-child(n+2){padding-left:22px;}
+  .beat-label{
+    font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;
+    text-transform:uppercase;color:var(--coral);margin-bottom:8px;display:block;
+  }
+  .beat h3{
+    font-family:var(--serif);font-size:19px;font-weight:600;margin:0 0 8px;
+  }
+  .beat p{font-size:14.5px;color:var(--ink-soft);margin:0;}
+
+  /* Dispatches (work experience) */
+  .dispatch{margin-bottom:40px;}
+  .dispatch:last-child{margin-bottom:0;}
+  .dispatch-head{
+    display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px;
+    border-bottom:1px solid var(--ink);padding-bottom:8px;margin-bottom:16px;
+  }
+  .dispatch-head h3{
+    font-family:var(--serif);font-weight:700;font-size:24px;margin:0;
+  }
+  .dispatch-meta{
+    font-family:var(--mono);font-size:11px;color:var(--ink-soft);letter-spacing:.04em;
+  }
+  .bylines{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
+    gap:22px;
+  }
+  .byline{border-left:2px solid var(--green); padding-left:14px;}
+  .byline .place{
+    font-family:var(--mono);font-size:11px;letter-spacing:.08em;
+    text-transform:uppercase;color:var(--green);display:block;margin-bottom:6px;
+  }
+  .byline ul{margin:0;padding-left:16px;font-size:14px;color:var(--ink-soft);}
+  .byline li{margin-bottom:4px;}
+
+  .clip-list{list-style:none;margin:0;padding:0;}
+  .clip-list li{
+    position:relative;padding-left:20px;margin-bottom:10px;font-size:15px;color:var(--ink-soft);
+  }
+  .clip-list li::before{
+    content:"—";position:absolute;left:0;color:var(--green);font-weight:600;
+  }
+
+  /* Pull quotes */
+  .quotes{display:grid;grid-template-columns:1fr 1fr;gap:36px;}
+  blockquote{
+    margin:0;position:relative;padding-top:6px;
+  }
+  blockquote .mark{
+    font-family:var(--serif);font-size:56px;color:var(--green);
+    line-height:0;display:block;margin-bottom:6px;font-style:italic;
+  }
+  blockquote p{
+    font-family:var(--serif);font-size:18px;font-style:italic;line-height:1.5;
+    color:var(--ink);margin:0 0 14px;
+  }
+  blockquote cite{
+    font-family:var(--mono);font-style:normal;font-size:11.5px;
+    letter-spacing:.05em;text-transform:uppercase;color:var(--ink-soft);
+  }
+  blockquote cite b{color:var(--ink);font-weight:600;}
+
+  /* Credentials */
+  .cred-grid{
+    display:grid;grid-template-columns:1fr 1fr;gap:34px;
+  }
+  .cred h4{
+    font-family:var(--serif);font-size:18px;margin:0 0 4px;font-weight:600;
+  }
+  .cred .school{
+    font-family:var(--mono);font-size:11.5px;color:var(--green);text-transform:uppercase;letter-spacing:.05em;
+  }
+  .cred p{font-size:14px;color:var(--ink-soft);margin:6px 0 0;}
+
+  .cert-strip{margin-top:30px;border-top:1px dashed var(--rule);padding-top:22px;}
+  .cert-strip .section-no{margin-bottom:10px;display:block;}
+  .certs{display:flex;flex-wrap:wrap;gap:10px;}
+  .cert-tag{
+    font-family:var(--mono);font-size:11.5px;border:1px solid var(--ink);
+    padding:6px 12px;border-radius:2px;color:var(--ink);
+  }
+
+  /* Refs */
+  .refs{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+  .ref .name{font-family:var(--serif);font-weight:600;font-size:16.5px;}
+  .ref .role{font-family:var(--mono);font-size:11px;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.04em;}
+
+  /* Contact / footer */
+  footer{
+    background:var(--ink);color:var(--paper);padding:54px 0 40px;
+  }
+  footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:30px;}
+  footer h2{
+    font-family:var(--serif);font-weight:600;font-size:34px;margin:0 0 6px;color:var(--paper);
+  }
+  footer .dek{color:#c9c5b8;}
+  .contact-list{margin-top:22px;}
+  .contact-list a{
+    color:var(--paper);text-decoration:none;font-family:var(--mono);font-size:14px;
+    display:block;margin-bottom:10px;border-bottom:1px solid #3a382f;padding-bottom:10px;
+    transition:color .15s ease;
+  }
+  .contact-list a:hover{color:var(--green-bright);}
+  .contact-list .lbl{color:#8a8778;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;display:block;margin-bottom:2px;}
+  .colophon{
+    font-family:var(--mono);font-size:10.5px;color:#6f6c5f;margin-top:34px;
+    border-top:1px solid #3a382f;padding-top:16px;
+  }
+
+  @media (max-width:720px){
+    .beats{grid-template-columns:1fr;}
+    .beat{border-right:none;border-bottom:1px solid var(--rule);padding:22px 0;}
+    .beat:nth-child(n+2){padding-left:0;}
+    .quotes{grid-template-columns:1fr;}
+    .cred-grid{grid-template-columns:1fr;}
+    .refs{grid-template-columns:1fr;}
+    .stat-strip{flex-direction:column;}
+    .stat{border-right:none;border-bottom:1px solid var(--rule);}
+  }
+
+  ::selection{background:var(--green);color:var(--paper);}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header class="masthead">
+    <div class="masthead-top">
+      <span>Bengaluru, India</span>
+      <span>Content &amp; Digital Marketing Desk</span>
+      <span>Vol. 01</span>
+    </div>
+    <p class="kicker">Portfolio &amp; Field Notes</p>
+    <h1 class="nameplate">Sahana B<br><em>Content Specialist</em></h1>
+    <p class="dek">Eight years across writing, campaigns, and digital marketing — four of them spent turning briefs into copy that ships, at Amazon and SmartQ.</p>
+
+    <div class="stat-strip">
+      <div class="stat">
+        <span class="num">4+</span>
+        <span class="label">Years in digital content &amp; campaigns</span>
+      </div>
+      <div class="stat">
+        <span class="num">5</span>
+        <span class="label">Markets written for — US, UK, India, Singapore, Brazil</span>
+      </div>
+      <div class="stat">
+        <span class="num">2</span>
+        <span class="label">Companies, zero missed deadlines on record</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- BEATS -->
+  <section id="beats">
+    <div class="section-head">
+      <span class="section-no">01</span>
+      <h2 class="section-title">What I Cover</h2>
+      <div class="section-rule"></div>
+    </div>
+    <div class="beats">
+      <div class="beat">
+        <span class="beat-label">Campaigns</span>
+        <h3>Concept to metrics</h3>
+        <p>Ideating, templatizing, and segmenting campaigns across email, push, and social — then A/B testing and reading the results back into the next one.</p>
+      </div>
+      <div class="beat">
+        <span class="beat-label">Writing</span>
+        <h3>Words that carry a brand</h3>
+        <p>Blog posts, social captions, newsletter cover stories, presentation content, and both digital and print creative copy.</p>
+      </div>
+      <div class="beat">
+        <span class="beat-label">Production</span>
+        <h3>Design-literate copywriting</h3>
+        <p>Working directly with design partners in Photoshop and Canva to make sure the words and the visuals land as one piece.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- DISPATCHES -->
+  <section id="work">
+    <div class="section-head">
+      <span class="section-no">02</span>
+      <h2 class="section-title">Field Reports</h2>
+      <div class="section-rule"></div>
+    </div>
+
+    <div class="dispatch">
+      <div class="dispatch-head">
+        <h3>Amazon — Global Marketplace Campaigns</h3>
+        <span class="dispatch-meta">Digital Content Associate · Jan 2021 – Jan 2025</span>
+      </div>
+      <p style="color:var(--ink-soft); margin:0 0 18px; font-size:15px;">Ran multi-channel campaigns — email, push, on-site, social — across five marketplaces, building enough stakeholder trust that launches shipped without hand-holding.</p>
+      <div class="bylines">
+        <div class="byline">
+          <span class="place">United States</span>
+          <ul><li>Subscription email &amp; push campaigns</li><li>On-site campaign management</li></ul>
+        </div>
+        <div class="byline">
+          <span class="place">India</span>
+          <ul><li>New-release campaigns for Prime Day &amp; seasonal events</li><li>Daily push and on-site content</li></ul>
+        </div>
+        <div class="byline">
+          <span class="place">Singapore</span>
+          <ul><li>Vendor data for games &amp; books</li><li>Subscription campaign support</li></ul>
+        </div>
+        <div class="byline">
+          <span class="place">Brazil</span>
+          <ul><li>Vendor pricing compilation</li><li>Subscription campaign management</li></ul>
+        </div>
+        <div class="byline">
+          <span class="place">United Kingdom</span>
+          <ul><li>Facebook &amp; Instagram campaigns</li><li>Reach expansion</li></ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="dispatch">
+      <div class="dispatch-head">
+        <h3>SmartQ — Creative Content &amp; Newsletter</h3>
+        <span class="dispatch-meta">Content Specialist · Nov 2025 – Present</span>
+      </div>
+      <ul class="clip-list">
+        <li>Write and compile "Bits &amp; Bytes," SmartQ's monthly internal newsletter, cover to cover.</li>
+        <li>Write social captions for LinkedIn and Instagram, and contribute posts to the company blog.</li>
+        <li>Develop launch content for client campaigns, working with design to keep messaging on-brand.</li>
+        <li>Organize monthly themed campaigns and food-partner activations that lift engagement at client cafeterias.</li>
+        <li>Write client- and leadership-facing presentation content, translating campaign results into a clear narrative.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- QUOTES -->
+  <section id="quotes">
+    <div class="section-head">
+      <span class="section-no">03</span>
+      <h2 class="section-title">On the Record</h2>
+      <div class="section-rule"></div>
+    </div>
+    <div class="quotes">
+      <blockquote>
+        <span class="mark">&ldquo;</span>
+        <p>Managed a challenging stakeholder relationship with zero escalations all year — proactive communication and consistent delivery that built real trust.</p>
+        <cite><b>Victor Joel Ezhilarasan</b> — Manager, Amazon</cite>
+      </blockquote>
+      <blockquote>
+        <span class="mark">&ldquo;</span>
+        <p>Delivered high-quality work within tight timelines during a critical event, with attention to detail and professionalism the whole team noticed.</p>
+        <cite><b>Simpi Patel</b> — Stakeholder, Amazon</cite>
+      </blockquote>
+    </div>
+  </section>
+
+  <!-- CREDENTIALS -->
+  <section id="credentials">
+    <div class="section-head">
+      <span class="section-no">04</span>
+      <h2 class="section-title">Credentials</h2>
+      <div class="section-rule"></div>
+    </div>
+    <div class="cred-grid">
+      <div class="cred">
+        <h4>PGDM, Digital Marketing</h4>
+        <span class="school">Great Lakes Executive Learning · 2022</span>
+        <p>Strategic digital marketing across search, social, email, display, and analytics.</p>
+      </div>
+      <div class="cred">
+        <h4>Bachelor of Computer Applications</h4>
+        <span class="school">Bangalore University · 2016</span>
+      </div>
+    </div>
+    <div class="cert-strip">
+      <span class="section-no">Certifications</span>
+      <div class="certs">
+        <span class="cert-tag">Digital Marketing Foundations</span>
+        <span class="cert-tag">SEO Foundations</span>
+        <span class="cert-tag">Canva Essentials</span>
+        <span class="cert-tag">Adobe Photoshop 2025</span>
+        <span class="cert-tag">Social Media Marketing — LinkedIn</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- REFERENCES -->
+  <section id="references">
+    <div class="section-head">
+      <span class="section-no">05</span>
+      <h2 class="section-title">References</h2>
+      <div class="section-rule"></div>
+    </div>
+    <div class="refs">
+      <div class="ref">
+        <div class="name">Victor Joel Ezhilarasan</div>
+        <div class="role">Manager, Amazon</div>
+      </div>
+      <div class="ref">
+        <div class="name">Kavitha</div>
+        <div class="role">Sr. Digital Content Specialist, Amazon</div>
+      </div>
+      <div class="ref">
+        <div class="name">Shambhavi</div>
+        <div class="role">Sr. Content Writer, SmartQ</div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <h2>Let's talk</h2>
+      <p class="dek">Open to content, digital marketing, and campaign roles.</p>
+    </div>
+    <div class="contact-list">
+      <a href="mailto:sahanabadri050496@gmail.com"><span class="lbl">Email</span>sahanabadri050496@gmail.com</a>
+      <a href="tel:+919742555321"><span class="lbl">Phone</span>+91 97425 55321</a>
+      <a href="https://www.linkedin.com/in/sahana-badri-a6b952104/" target="_blank" rel="noopener"><span class="lbl">LinkedIn</span>linkedin.com/in/sahana-badri-a6b952104</a>
+    </div>
+    <div class="colophon">Sahana B · Content &amp; Digital Marketing Portfolio</div>
+  </div>
+</footer>
+
+</body>
+</html>
